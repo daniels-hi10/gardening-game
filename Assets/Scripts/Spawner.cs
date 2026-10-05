@@ -12,7 +12,7 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         Timer = 0f;
-        SpawnRate = Random.Range(3f, 5f);
+        SpawnRate = 6f;
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class Spawner : MonoBehaviour
         float zTop = 16.5f;
         float zMid = 12.85f;
         float zLow = 9.3f;
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
         {
             List<Vector3> plantPos = new List<Vector3>(); // list of dirt patches
             
@@ -58,6 +58,7 @@ public class Spawner : MonoBehaviour
             int randomPos = Random.Range(0, plantPos.Count); // pick random number from 1st to 9th position
 
             Instantiate(Plants[p], plantPos[randomPos], Quaternion.identity); // instantiate needs the game object, vector3 location, rotation, spawn at that location (location as vector3)
+            // ok problem, i need to figure out how to instantiate without having the plants overlap each other
         }
     }
 }

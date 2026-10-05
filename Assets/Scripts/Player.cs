@@ -1,14 +1,21 @@
 using JetBrains.Annotations;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
+    // camera movement
     public Camera Eyes; // camera variable
     public float MouseSens = 1; // mouse sensitivity
     public Rigidbody RB;
 
+    // character stats
     public float Speed = 3;
+    public float JumpPower = 4;
+
+    public List<GameObject> Floors; // list of solid objects im touching
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -31,6 +38,16 @@ public class Player : MonoBehaviour
         transform.Rotate(0, mouse.x * MouseSens, 0); // left and right
         Eyes.transform.Rotate(mouse.y * MouseSens * -1, 0, 0); // rotates mouse up and down, negative for inverted mouse reasons
 
+        /* if (Mouse.current.leftButton.wasPressedThisFrame) // if i click
+        {
+        // basically perform an action
+            // if i have a flowering pot
+                //accelerate growing speed
+            // if i have a hoe
+                // cut weed
+            // if i have a shovel
+                // remove flowers
+        } */
     }
 
     public void KeyboardControl() // function for keyboard controls
@@ -52,6 +69,31 @@ public class Player : MonoBehaviour
         else
             Speed = 3;
 
+        // space - if i jump and grounded, jump
+        if (JumpPower > 0 && Keyboard.current.spaceKey.wasPressedThisFrame && OnGround())
+            vel.y = JumpPower;
+        else // otherwise, y velocity is whatever it was last frame
+            vel.y = RB.linearVelocity.y;
+        
         RB.linearVelocity = vel;
+    }
+
+    public bool OnGround()
+    {
+        return Floors.Count > 0;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        // if i touch something that's not in the list of things im touching
+        if (!Floors.Contains(other.gameObject))
+        {
+            Floors.Add(other.gameObject); // add the object to the list
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        Floors.Remove(other.gameObject);
     }
 }
