@@ -4,6 +4,15 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 
+public enum Tools
+{
+    Nothing,
+    Seed,
+
+    Can,
+    Hoe
+}
+
 public class Player : MonoBehaviour
 {
     // camera movement
@@ -16,6 +25,7 @@ public class Player : MonoBehaviour
     public float JumpPower = 4;
 
     public List<GameObject> Floors; // list of solid objects im touching
+    public Tools SelectedTool = Tools.Nothing;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,6 +39,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         MouseControl(); KeyboardControl();
+        ToolSelection();
     }
 
     public void MouseControl() // function for mouse controls
@@ -38,7 +49,16 @@ public class Player : MonoBehaviour
         transform.Rotate(0, mouse.x * MouseSens, 0); // left and right
         Eyes.transform.Rotate(mouse.y * MouseSens * -1, 0, 0); // rotates mouse up and down, negative for inverted mouse reasons
 
-        /* if (Mouse.current.leftButton.wasPressedThisFrame) // if i click
+        if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            if (Physics.Raycast(Eyes.transform.position, Eyes.transform.forward, out RaycastHit hit, 10))
+            {
+                Debug.Log(hit.collider.gameObject.name);
+
+                // Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+            }
+        }
+        /* if  // if i click
         {
         // basically perform an action
             // if i have a flowering pot
@@ -76,6 +96,84 @@ public class Player : MonoBehaviour
             vel.y = RB.linearVelocity.y;
         
         RB.linearVelocity = vel;
+    }
+
+    public void ToolSelection()
+    {
+        switch (SelectedTool)
+        {
+            case Tools.Nothing:
+                if (Keyboard.current.digit1Key.wasPressedThisFrame)
+                {
+                    SelectedTool = Tools.Seed;
+                    Debug.Log(SelectedTool);
+                }
+                if (Keyboard.current.digit2Key.wasPressedThisFrame)
+                {
+                    SelectedTool = Tools.Can;
+                    Debug.Log(SelectedTool);
+                }
+                if (Keyboard.current.digit3Key.wasPressedThisFrame)
+                {
+                    SelectedTool = Tools.Hoe;
+                    Debug.Log(SelectedTool);
+                }
+                break;
+
+            case Tools.Seed:
+                if (Keyboard.current.digit2Key.wasPressedThisFrame)
+                {
+                    SelectedTool = Tools.Can;
+                    Debug.Log(SelectedTool);
+                }
+                if (Keyboard.current.digit3Key.wasPressedThisFrame)
+                {
+                    SelectedTool = Tools.Hoe;
+                    Debug.Log(SelectedTool);
+                }
+                if (Keyboard.current.digit4Key.wasPressedThisFrame)
+                {
+                    SelectedTool = Tools.Nothing;
+                    Debug.Log(SelectedTool);
+                }
+                break;
+
+            case Tools.Hoe:
+                if (Keyboard.current.digit1Key.wasPressedThisFrame)
+                {
+                    SelectedTool = Tools.Seed;
+                    Debug.Log(SelectedTool);
+                }
+                if (Keyboard.current.digit2Key.wasPressedThisFrame)
+                {
+                    SelectedTool = Tools.Can;
+                    Debug.Log(SelectedTool);
+                }
+                if (Keyboard.current.digit4Key.wasPressedThisFrame)
+                {
+                    SelectedTool = Tools.Nothing;
+                    Debug.Log(SelectedTool);
+                }
+                break;
+
+            case Tools.Can:
+                if (Keyboard.current.digit1Key.wasPressedThisFrame)
+                {
+                    SelectedTool = Tools.Seed;
+                    Debug.Log(SelectedTool);
+                }
+                if (Keyboard.current.digit3Key.wasPressedThisFrame)
+                {
+                    SelectedTool = Tools.Hoe;
+                    Debug.Log(SelectedTool);
+                }
+                if (Keyboard.current.digit4Key.wasPressedThisFrame)
+                {
+                    SelectedTool = Tools.Nothing;
+                    Debug.Log(SelectedTool);
+                }
+                break;
+        }
     }
 
     public bool OnGround()

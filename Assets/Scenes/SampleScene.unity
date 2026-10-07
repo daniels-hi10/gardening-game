@@ -1008,9 +1008,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Spawner
   Plants:
   - {fileID: 5517686328230721644, guid: 5e73def0bf886194b8b12efaeb019c1c, type: 3}
-  - {fileID: 4337334386240772233, guid: be6e80c66e11cb446a20417ae0a27dbb, type: 3}
   Timer: 0
   SpawnRate: 0
+  IsPlanted: 0
 --- !u!1 &1313936323
 GameObject:
   m_ObjectHideFlags: 0
@@ -1858,6 +1858,7 @@ MonoBehaviour:
   Speed: 3
   JumpPower: 4
   Floors: []
+  SelectedTool: 0
 --- !u!54 &2104112892
 Rigidbody:
   m_ObjectHideFlags: 0
