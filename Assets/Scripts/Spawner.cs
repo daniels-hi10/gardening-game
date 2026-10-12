@@ -4,14 +4,16 @@ using System.Collections.Generic;
 public class Spawner : MonoBehaviour
 {
     public List<GameObject> Plants = new List<GameObject>(); // list of plants: weeds, flowers, whatever whimsical shit
+    private List<Vector3> vacantPos = new List<Vector3>(); // list of empty patches
+    private List<Vector3> occupiedPos = new List<Vector3>(); // list of full patches
 
     public float Timer; // timer before next spawn
     public float SpawnRate; // interval between plants to spawn
-    public bool IsPlanted; // checks if a plant is already planted
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        PlantPos();
         Timer = 0f;
         SpawnRate = 6f;
     }
@@ -22,46 +24,58 @@ public class Spawner : MonoBehaviour
         Timer -= Time.deltaTime;
         if (Timer <= 0)
         {
-            // if (!IsPlanted) // only executes if a weed is not planted
-            // {
-                SpawnPlant(); // spawn plant
-                Timer = SpawnRate; // reset timer IF the weed isn't alr planted
-            // }
+            SpawnPlant(); // spawn plant
+            Timer = SpawnRate; // reset timer IF the weed isn't alr planted
         }
     }
 
-
-    void SpawnPlant()
+    void PlantPos()
     {
         float yPos = 0.13f;
         float zTop = 16.5f;
         float zMid = 12.85f;
         float zLow = 9.3f;
-        for (int i = 0; i < 1; i++)
+
+        // first row
+        vacantPos.Add(new Vector3(-8f, yPos, zTop));
+        vacantPos.Add(new Vector3(-4.75f, yPos, zTop));
+        vacantPos.Add(new Vector3(-1.55f, yPos, zTop));
+
+        // second row
+        vacantPos.Add(new Vector3(-8f, yPos, zMid));
+        vacantPos.Add(new Vector3(-4.75f, yPos, zMid));
+        vacantPos.Add(new Vector3(-1.55f, yPos, zMid));
+
+        // third row
+        vacantPos.Add(new Vector3(-8f, yPos, zLow));
+        vacantPos.Add(new Vector3(-4.75f, yPos, zLow));
+        vacantPos.Add(new Vector3(-1.55f, yPos, zLow));
+    }
+
+    void SpawnPlant()
+    {
+        if (vacantPos.Count == 0) // if there are no vacant spots left, stop growing weeds
         {
-            List<Vector3> plantPos = new List<Vector3>(); // list of dirt patches
-            
-            // first row (ok thinking about it i could've maybe created a list of just the zcoords)
-            plantPos.Add(new Vector3(-8f, yPos, zTop));
-            plantPos.Add(new Vector3(-4.75f, yPos, zTop));
-            plantPos.Add(new Vector3(-1.55f, yPos, zTop));
+            return;
+        }
 
-            // second row
-            plantPos.Add(new Vector3(-8f, yPos, zMid));
-            plantPos.Add(new Vector3(-4.75f, yPos, zMid));
-            plantPos.Add(new Vector3(-1.55f, yPos, zMid));
+        int i = Random.Range(0, vacantPos.Count);
+        Vector3 targetPos = vacantPos[i];
 
-            // third row
-            plantPos.Add(new Vector3(-8f, yPos, zLow));
-            plantPos.Add(new Vector3(-4.75f, yPos, zLow));
-            plantPos.Add(new Vector3(-1.55f, yPos, zLow));
+        int p = Random.Range(0, Plants.Count); // pick an random location from the stored place (list)
+        GameObject PlantType = Plants[p];
 
-            int p = Random.Range(0, Plants.Count); // pick an random location from the stored place (list)
-            GameObject PlantType = Plants[p];
+        Instantiate(PlantType, targetPos, Quaternion.identity); // instantiate needs the game object, vector3 location, rotation, spawn at that location (location as vector3)
+        vacantPos.Remove(targetPos); // removes the recently spawned weed from overlapping with plants
+        occupiedPos.Add(targetPos); // adds the recently spawned to occupied so it can't overlap with plants
+    }
 
-            int randomPos = Random.Range(0, plantPos.Count); // pick random number from 1st to 9th position
-
-            Instantiate(Plants[p], plantPos[randomPos], Quaternion.identity); // instantiate needs the game object, vector3 location, rotation, spawn at that location (location as vector3)
+    public void FreeUpSpot(Vector3 empty)
+    {
+        if (occupiedPos.Contains(empty)) // if the patch is empty
+        {
+            occupiedPos.Remove(empty); // remove empty dirt from occupied so that it can spawn again
+            vacantPos.Add(empty); // adds the empty dity back to the list of vacant spots
         }
     }
 }

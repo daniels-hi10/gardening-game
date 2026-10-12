@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public enum Tools
 {
-    Nothing,
+    Hands,
     Seed,
 
     Can,
@@ -18,14 +18,16 @@ public class Player : MonoBehaviour
     // camera movement
     public Camera Eyes; // camera variable
     public float MouseSens = 1; // mouse sensitivity
+    public Spawner spawner; // reference to spawner
     public Rigidbody RB;
+
 
     // character stats
     public float Speed = 3;
     public float JumpPower = 4;
 
     public List<GameObject> Floors; // list of solid objects im touching
-    public Tools SelectedTool = Tools.Nothing;
+    public Tools SelectedTool = Tools.Hands;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -33,6 +35,7 @@ public class Player : MonoBehaviour
     {
         Cursor.visible = false; // turns cursor invisible
         Cursor.lockState = CursorLockMode.Locked; // locks mouse to center of screen
+        spawner = FindFirstObjectByType<Spawner>();
     }
 
     // Update is called once per frame
@@ -58,14 +61,14 @@ public class Player : MonoBehaviour
                 // Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
             }
         }
-        /* if  // if i click
+        /* if i click
         {
         // basically perform an action
             // if i have a flowering pot
                 //accelerate growing speed
             // if i have a hoe
                 // cut weed
-            // if i have a shovel
+            // if i don't have anything
                 // remove flowers
         } */
     }
@@ -102,7 +105,8 @@ public class Player : MonoBehaviour
     {
         switch (SelectedTool)
         {
-            case Tools.Nothing:
+            case Tools.Hands: // if i am only using my hands
+                /// switch tool
                 if (Keyboard.current.digit1Key.wasPressedThisFrame)
                 {
                     SelectedTool = Tools.Seed;
@@ -118,6 +122,9 @@ public class Player : MonoBehaviour
                     SelectedTool = Tools.Hoe;
                     Debug.Log(SelectedTool);
                 }
+
+                // plant a seed
+
                 break;
 
             case Tools.Seed:
@@ -133,7 +140,7 @@ public class Player : MonoBehaviour
                 }
                 if (Keyboard.current.digit4Key.wasPressedThisFrame)
                 {
-                    SelectedTool = Tools.Nothing;
+                    SelectedTool = Tools.Hands;
                     Debug.Log(SelectedTool);
                 }
                 break;
@@ -151,7 +158,7 @@ public class Player : MonoBehaviour
                 }
                 if (Keyboard.current.digit4Key.wasPressedThisFrame)
                 {
-                    SelectedTool = Tools.Nothing;
+                    SelectedTool = Tools.Hands;
                     Debug.Log(SelectedTool);
                 }
                 break;
@@ -169,7 +176,7 @@ public class Player : MonoBehaviour
                 }
                 if (Keyboard.current.digit4Key.wasPressedThisFrame)
                 {
-                    SelectedTool = Tools.Nothing;
+                    SelectedTool = Tools.Hands;
                     Debug.Log(SelectedTool);
                 }
                 break;
