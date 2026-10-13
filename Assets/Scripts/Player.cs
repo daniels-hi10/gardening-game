@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
+// using TMPro;
 using System.Collections.Generic;
 
 public enum Tools
@@ -34,6 +35,8 @@ public class Player : MonoBehaviour
     // score + time tracking 
     public int Score;
     public float GameTimer;
+    // public TextMeshPro ScoreText;
+    // public TextMeshPro ToolText;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -50,6 +53,7 @@ public class Player : MonoBehaviour
     {
         MouseControl(); KeyboardControl();
         ToolSelection();
+        // ScoreText.text = "Score: " + Score;
     }
 
     public void MouseControl() // function for mouse controls
@@ -94,21 +98,25 @@ public class Player : MonoBehaviour
         {
             // hands equipped
             case Tools.Hands:
+                // ToolText.text = "Currently Equipped: " + SelectedTool;
                 /// switch tool
                 if (Keyboard.current.digit1Key.wasPressedThisFrame)
                 {
                     SelectedTool = Tools.Seed;
                     Debug.Log(SelectedTool);
+                    // ToolText.text = "Currently Equipped: " + SelectedTool;
                 }
                 if (Keyboard.current.digit2Key.wasPressedThisFrame)
                 {
                     SelectedTool = Tools.Can;
                     Debug.Log(SelectedTool);
+                    // ToolText.text = "Currently Equipped: " + SelectedTool;
                 }
                 if (Keyboard.current.digit3Key.wasPressedThisFrame)
                 {
                     SelectedTool = Tools.Hoe;
                     Debug.Log(SelectedTool);
+                    // ToolText.text = "Currently Equipped: " + SelectedTool;
                 }
 
                 // remove beans
@@ -145,16 +153,19 @@ public class Player : MonoBehaviour
                 {
                     SelectedTool = Tools.Can;
                     Debug.Log(SelectedTool);
+                    // ToolText.text = "Currently Equipped: " + SelectedTool;
                 }
                 if (Keyboard.current.digit3Key.wasPressedThisFrame)
                 {
                     SelectedTool = Tools.Hoe;
                     Debug.Log(SelectedTool);
+                    // ToolText.text = "Currently Equipped: " + SelectedTool;
                 }
                 if (Keyboard.current.digit4Key.wasPressedThisFrame)
                 {
                     SelectedTool = Tools.Hands;
                     Debug.Log(SelectedTool);
+                    // ToolText.text = "Currently Equipped: " + SelectedTool;
                 }
 
 
@@ -202,16 +213,19 @@ public class Player : MonoBehaviour
                 {
                     SelectedTool = Tools.Seed;
                     Debug.Log(SelectedTool);
+                    // ToolText.text = "Currently Equipped: " + SelectedTool;
                 }
                 if (Keyboard.current.digit2Key.wasPressedThisFrame)
                 {
                     SelectedTool = Tools.Can;
                     Debug.Log(SelectedTool);
+                    // ToolText.text = "Currently Equipped: " + SelectedTool;
                 }
                 if (Keyboard.current.digit4Key.wasPressedThisFrame)
                 {
                     SelectedTool = Tools.Hands;
                     Debug.Log(SelectedTool);
+                    // ToolText.text = "Currently Equipped: " + SelectedTool;
                 }
 
                 // if i click
@@ -266,16 +280,19 @@ public class Player : MonoBehaviour
                 {
                     SelectedTool = Tools.Seed;
                     Debug.Log(SelectedTool);
+                    // ToolText.text = "Currently Equipped: " + SelectedTool;
                 }
                 if (Keyboard.current.digit3Key.wasPressedThisFrame)
                 {
                     SelectedTool = Tools.Hoe;
                     Debug.Log(SelectedTool);
+                    // ToolText.text = "Currently Equipped: " + SelectedTool;
                 }
                 if (Keyboard.current.digit4Key.wasPressedThisFrame)
                 {
                     SelectedTool = Tools.Hands;
                     Debug.Log(SelectedTool);
+                    // ToolText.text = "Currently Equipped: " + SelectedTool;
                 }
 
                 // water seed
