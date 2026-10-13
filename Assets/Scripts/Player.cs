@@ -36,8 +36,9 @@ public class Player : MonoBehaviour
     // score + time tracking 
     public int Score;
     public float GameTimer;
-    public TextMeshPro ScoreText;
-    public TextMeshPro ToolText;
+    public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI ToolText;
+    public TextMeshProUGUI TimerText;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -47,6 +48,7 @@ public class Player : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked; // locks mouse to center of screen
         spawner = FindFirstObjectByType<Spawner>();
         Score = 0;
+        GameTimer = 101;
     }
 
     // Update is called once per frame
@@ -55,6 +57,11 @@ public class Player : MonoBehaviour
         MouseControl(); KeyboardControl();
         ToolSelection();
         ScoreText.text = "Score: " + Score;
+
+
+        GameTimer -= Time.deltaTime;
+        TimerText.text = "" + (int)GameTimer;
+
     }
 
     public void MouseControl() // function for mouse controls
@@ -93,31 +100,31 @@ public class Player : MonoBehaviour
         RB.linearVelocity = vel;
     }
 
-    public void ToolSelection()
+    public void ToolSelection() // use numkeys 1-4 to cycle between tools
     {
         switch (SelectedTool)
         {
             // hands equipped
             case Tools.Hands:
-                // ToolText.text = "Currently Equipped: " + SelectedTool;
+                ToolText.text = "Equipped: " + SelectedTool;
                 /// switch tool
                 if (Keyboard.current.digit1Key.wasPressedThisFrame)
                 {
                     SelectedTool = Tools.Seed;
                     Debug.Log(SelectedTool);
-                    ToolText.text = "Currently Equipped: " + SelectedTool;
+                    ToolText.text = "Equipped: " + SelectedTool;
                 }
                 if (Keyboard.current.digit2Key.wasPressedThisFrame)
                 {
                     SelectedTool = Tools.Can;
                     Debug.Log(SelectedTool);
-                    ToolText.text = "Currently Equipped: " + SelectedTool;
+                    ToolText.text = "Equipped: " + SelectedTool;
                 }
                 if (Keyboard.current.digit3Key.wasPressedThisFrame)
                 {
                     SelectedTool = Tools.Hoe;
                     Debug.Log(SelectedTool);
-                    ToolText.text = "Currently Equipped: " + SelectedTool;
+                    ToolText.text = "Equipped: " + SelectedTool;
                 }
 
                 // remove beans
@@ -129,7 +136,7 @@ public class Player : MonoBehaviour
 
                         if (grown != null && grown.CurrentStage == Beans.Stages.Mature) // if beans are grown
                         {
-                            Vector3 g = grown.transform.position;
+                            Vector3 g = grown.transform.position; // gets the position of the grown beans
 
                             if (spawner != null)
                             {
@@ -154,19 +161,19 @@ public class Player : MonoBehaviour
                 {
                     SelectedTool = Tools.Can;
                     Debug.Log(SelectedTool);
-                    ToolText.text = "Currently Equipped: " + SelectedTool;
+                    ToolText.text = "Equipped: " + SelectedTool;
                 }
                 if (Keyboard.current.digit3Key.wasPressedThisFrame)
                 {
                     SelectedTool = Tools.Hoe;
                     Debug.Log(SelectedTool);
-                    ToolText.text = "Currently Equipped: " + SelectedTool;
+                    ToolText.text = "Equipped: " + SelectedTool;
                 }
                 if (Keyboard.current.digit4Key.wasPressedThisFrame)
                 {
                     SelectedTool = Tools.Hands;
                     Debug.Log(SelectedTool);
-                    ToolText.text = "Currently Equipped: " + SelectedTool;
+                    ToolText.text = "Equipped: " + SelectedTool;
                 }
 
 
@@ -214,19 +221,19 @@ public class Player : MonoBehaviour
                 {
                     SelectedTool = Tools.Seed;
                     Debug.Log(SelectedTool);
-                    ToolText.text = "Currently Equipped: " + SelectedTool;
+                    ToolText.text = "Equipped: " + SelectedTool;
                 }
                 if (Keyboard.current.digit2Key.wasPressedThisFrame)
                 {
                     SelectedTool = Tools.Can;
                     Debug.Log(SelectedTool);
-                    ToolText.text = "Currently Equipped: " + SelectedTool;
+                    ToolText.text = "Equipped: " + SelectedTool;
                 }
                 if (Keyboard.current.digit4Key.wasPressedThisFrame)
                 {
                     SelectedTool = Tools.Hands;
                     Debug.Log(SelectedTool);
-                    ToolText.text = "Currently Equipped: " + SelectedTool;
+                    ToolText.text = "Equipped: " + SelectedTool;
                 }
 
                 // if i click
@@ -239,7 +246,7 @@ public class Player : MonoBehaviour
 
                         if (weed != null) // if there is a weed
                         {
-                            Vector3 w1 = weed.transform.position;
+                            Vector3 w1 = weed.transform.position; // gets the position of the weed
                             Score++;
                             Destroy(weed.gameObject); // i remove the weed
 
@@ -255,7 +262,7 @@ public class Player : MonoBehaviour
                         {
                             if (wilt.CurrentStage == Beans.Stages.Wilted)
                             {
-                                Vector3 w2 = wilt.transform.position; // remove beans
+                                Vector3 w2 = wilt.transform.position; // gets the position of the wilted beans
 
                                 if (spawner != null)
                                 {
@@ -281,19 +288,19 @@ public class Player : MonoBehaviour
                 {
                     SelectedTool = Tools.Seed;
                     Debug.Log(SelectedTool);
-                    ToolText.text = "Currently Equipped: " + SelectedTool;
+                    ToolText.text = "Equipped: " + SelectedTool;
                 }
                 if (Keyboard.current.digit3Key.wasPressedThisFrame)
                 {
                     SelectedTool = Tools.Hoe;
                     Debug.Log(SelectedTool);
-                    ToolText.text = "Currently Equipped: " + SelectedTool;
+                    ToolText.text = "Equipped: " + SelectedTool;
                 }
                 if (Keyboard.current.digit4Key.wasPressedThisFrame)
                 {
                     SelectedTool = Tools.Hands;
                     Debug.Log(SelectedTool);
-                    ToolText.text = "Currently Equipped: " + SelectedTool;
+                    ToolText.text = "Equipped: " + SelectedTool;
                 }
 
                 // water seed
