@@ -25,8 +25,8 @@ public class Weed : MonoBehaviour
                 spawner.FreeUpSpot(pos);
             }
 
-            player.Score -= 1;
-            Debug.Log("Score: " + player.Score);
+            Player.Score -= 1;
+            Debug.Log("Score: " + Player.Score);
             Destroy(gameObject);
         }
     }

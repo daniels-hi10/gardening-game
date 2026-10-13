@@ -68,8 +68,8 @@ public class Beans : MonoBehaviour
                 case Stages.Seed:
                     {
                         CurrentStage = Stages.Clover;
-                        player.Score++;
-                        Debug.Log("seed is now clover, Score: " + player.Score);
+                        Player.Score++;
+                        Debug.Log("seed is now clover, Score: " + Player.Score);
                         WaterTimer = 5f;
                         Bean.material.color = Color.yellow;
                         break;

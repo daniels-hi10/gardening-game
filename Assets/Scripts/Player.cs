@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     public GameObject beans; // beans prefab
 
     // score + time tracking 
-    public int Score;
+    public static int Score;
     public float GameTimer;
     public TextMeshProUGUI ScoreText;
     public TextMeshProUGUI ToolText;
@@ -62,6 +62,12 @@ public class Player : MonoBehaviour
         GameTimer -= Time.deltaTime;
         TimerText.text = "" + (int)GameTimer;
 
+        if (GameTimer <= 1)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            SceneManager.LoadScene("GameOver");
+        }
     }
 
     public void MouseControl() // function for mouse controls
