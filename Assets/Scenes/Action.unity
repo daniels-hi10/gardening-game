@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 364013440}
   - component: {fileID: 364013439}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -402,7 +402,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 508.5144, y: 227.5}
+  m_AnchoredPosition: {x: 570.17, y: 312}
   m_SizeDelta: {x: 83.9711, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &364013439
@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 372530246}
   - component: {fileID: 372530245}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: EquippedTool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -539,7 +539,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 361.34363, y: -227.5}
+  m_AnchoredPosition: {x: 423, y: -305}
   m_SizeDelta: {x: 378.3128, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &372530245
@@ -1350,7 +1350,7 @@ GameObject:
   - component: {fileID: 1196226356}
   - component: {fileID: 1196226355}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1372,7 +1372,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -418, y: -227.5}
+  m_AnchoredPosition: {x: -509, y: -314}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1196226355
@@ -2461,8 +2461,9 @@ MonoBehaviour:
   beans: {fileID: 7351381243329188801, guid: 9bf7ed4c6b174914f815d5dd5fa8fc16, type: 3}
   Score: 0
   GameTimer: 0
-  ScoreText: {fileID: 0}
-  ToolText: {fileID: 0}
+  ScoreText: {fileID: 1196226355}
+  ToolText: {fileID: 372530245}
+  TimerText: {fileID: 364013439}
 --- !u!54 &2104112892
 Rigidbody:
   m_ObjectHideFlags: 0
