@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 55004040}
   - component: {fileID: 55004039}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Dirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 754957989}
   - component: {fileID: 754957988}
   m_Layer: 0
-  m_Name: Cube (6)
+  m_Name: Dirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -782,7 +782,7 @@ GameObject:
   - component: {fileID: 1171169064}
   - component: {fileID: 1171169063}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Dirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -895,7 +895,7 @@ GameObject:
   - component: {fileID: 1282824728}
   - component: {fileID: 1282824732}
   m_Layer: 0
-  m_Name: Dirt
+  m_Name: DirtPatch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1008,9 +1008,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Spawner
   Plants:
   - {fileID: 5517686328230721644, guid: 5e73def0bf886194b8b12efaeb019c1c, type: 3}
+  vacantPos: []
+  occupiedPos: []
+  weedPos: []
+  beans: []
   Timer: 0
   SpawnRate: 0
-  IsPlanted: 0
 --- !u!1 &1313936323
 GameObject:
   m_ObjectHideFlags: 0
@@ -1024,7 +1027,7 @@ GameObject:
   - component: {fileID: 1313936326}
   - component: {fileID: 1313936325}
   m_Layer: 0
-  m_Name: Cube (7)
+  m_Name: Dirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1136,7 +1139,7 @@ GameObject:
   - component: {fileID: 1432819066}
   - component: {fileID: 1432819065}
   m_Layer: 0
-  m_Name: Cube (9)
+  m_Name: Dirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1248,7 +1251,7 @@ GameObject:
   - component: {fileID: 1562280435}
   - component: {fileID: 1562280434}
   m_Layer: 0
-  m_Name: Cube (3)
+  m_Name: Dirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1360,7 +1363,7 @@ GameObject:
   - component: {fileID: 1639928399}
   - component: {fileID: 1639928398}
   m_Layer: 0
-  m_Name: Cube (12)
+  m_Name: Dirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1512,7 +1515,7 @@ GameObject:
   - component: {fileID: 1743327186}
   - component: {fileID: 1743327185}
   m_Layer: 0
-  m_Name: Cube (11)
+  m_Name: Dirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1624,7 +1627,7 @@ GameObject:
   - component: {fileID: 2032146476}
   - component: {fileID: 2032146475}
   m_Layer: 0
-  m_Name: Cube (5)
+  m_Name: Dirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1854,11 +1857,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   Eyes: {fileID: 330585545}
   MouseSens: 1
+  spawner: {fileID: 0}
+  bean: {fileID: -4326679383997757578, guid: 9bf7ed4c6b174914f815d5dd5fa8fc16, type: 3}
   RB: {fileID: 2104112892}
   Speed: 3
   JumpPower: 4
   Floors: []
   SelectedTool: 0
+  beans: {fileID: 7351381243329188801, guid: 9bf7ed4c6b174914f815d5dd5fa8fc16, type: 3}
 --- !u!54 &2104112892
 Rigidbody:
   m_ObjectHideFlags: 0
